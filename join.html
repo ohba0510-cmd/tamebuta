@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>タメブタに招待されました</title>
+<meta property="og:title" content="タメブタに招待されました">
+<meta property="og:description" content="がまんするほどブタが育つ。いっしょに貯金しよう。">
+<meta property="og:image" content="icon.png">
+<link rel="icon" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .center{text-align:center}
+  .pig{width:120px;height:120px;border-radius:28px;margin:8px auto 12px;display:block}
+  .code{font-size:32px;font-weight:900;letter-spacing:.18em;background:var(--bg);border-radius:16px;padding:12px;margin:8px 0 4px;word-break:break-all}
+  .btn{display:block;width:100%;border:0;border-radius:18px;padding:15px;font-family:inherit;font-weight:900;font-size:18px;line-height:1.2;color:#fff;text-decoration:none;text-align:center;cursor:pointer;margin-top:12px}
+  .go{background:var(--go);border-bottom:5px solid #0E7F59}
+  .sky{background:var(--sky);border-bottom:5px solid #1F66B0}
+  .ghost{background:transparent;color:var(--ink);border:2px solid var(--line);font-size:15px}
+  .steps{text-align:left;font-size:15px;padding-left:1.4em;margin:16px 0 0}
+  .muted{color:var(--muted);font-size:13px}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main>
+  <div class="card center">
+    <img class="pig" src="icon.png" alt="タメブタのアイコン">
+    <h1>タメブタに招待されました</h1>
+    <p>がまんした金額を記録すると、ブタが育つ貯金アプリです。<br>家族や友達といっしょに励まし合えます。</p>
+
+    <div id="hasCode">
+      <div class="muted">招待コード</div>
+      <div class="code" id="code"></div>
+      <button class="btn ghost" id="copy" type="button">コードをコピー</button>
+
+      <a class="btn go" id="open" href="#">アプリで開いて参加する</a>
+      <a class="btn sky" id="store" href="#" hidden>App Store でアプリを入れる</a>
+      <p class="muted" id="soon" hidden>アプリはまもなく App Store で公開されます。公開されたら、もう一度このページを開いてください。</p>
+
+      <ol class="steps">
+        <li>アプリを入れて、Apple・LINE・Google のどれかでログイン</li>
+        <li>「招待コードをもらった」を選んで、上のコードを入力</li>
+        <li>「みんな」タブにグループが表示されたら参加完了</li>
+      </ol>
+    </div>
+    <p id="noCode" hidden>招待コードが見つかりませんでした。招待してくれた人に、もう一度リンクを送ってもらってください。</p>
+  </div>
+</main>
+<footer><a href="terms.html">利用規約</a><a href="privacy.html">プライバシーポリシー</a></footer>
+<script src="config.js"></script>
+<script>
+  (function () {
+    var cfg = window.TAMEBUTA || {};
+    var params = new URLSearchParams(location.search);
+    var code = (params.get("c") || location.hash.replace("#", "")).toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 12);
+    if (!code) { document.getElementById("hasCode").hidden = true; document.getElementById("noCode").hidden = false; return; }
+    document.getElementById("code").textContent = code;
+    document.getElementById("open").href = (cfg.scheme || "tamebuta") + "://join/" + code;
+    if (cfg.appStoreUrl) { var s = document.getElementById("store"); s.href = cfg.appStoreUrl; s.hidden = false; }
+    else document.getElementById("soon").hidden = false;
+    document.getElementById("copy").addEventListener("click", function () {
+      var b = this;
+      (navigator.clipboard ? navigator.clipboard.writeText(code) : Promise.reject()).then(function () { b.textContent = "コピーしました"; })
+        .catch(function () { b.textContent = "コード：" + code; });
+    });
+  })();
+</script>
+</body>
+</html>

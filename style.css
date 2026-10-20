@@ -1,0 +1,14 @@
+:root{--bg:#EAF5FF;--card:#fff;--ink:#2B3A55;--muted:#5E6B85;--line:#E3ECF6;--go:#13A574;--sky:#2F86E0;--pig:#E5587E}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"M PLUS Rounded 1c","Hiragino Maru Gothic ProN","Hiragino Sans",sans-serif;line-height:1.75;padding:24px 16px 56px}
+main{max-width:640px;margin:0 auto}
+.card{background:var(--card);border-radius:24px;padding:24px;border-bottom:4px solid var(--line)}
+h1{font-size:24px;line-height:1.4;margin:0 0 8px}
+h2{font-size:18px;margin:28px 0 6px}
+a{color:var(--sky)}
+table{border-collapse:collapse;width:100%;font-size:14px;display:block;overflow-x:auto}
+th,td{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}
+blockquote{margin:0 0 16px;padding:10px 14px;background:#FFF4E0;border-radius:12px;color:#8A5300;font-size:14px}
+.brand{display:flex;align-items:center;gap:10px;margin-bottom:16px;font-weight:900;color:var(--ink);text-decoration:none}
+.brand img{width:40px;height:40px;border-radius:10px}
+footer{max-width:640px;margin:24px auto 0;font-size:13px;color:var(--muted);display:flex;gap:16px;flex-wrap:wrap}
